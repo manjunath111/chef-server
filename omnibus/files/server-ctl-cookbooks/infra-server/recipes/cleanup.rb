@@ -39,3 +39,7 @@ end
     action :delete
   end
 end
+directory '/opt/opscode/sv/elasticsearch' do
+  recursive true
+  action :delete
+end

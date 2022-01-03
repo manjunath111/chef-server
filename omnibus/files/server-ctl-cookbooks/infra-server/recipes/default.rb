@@ -126,7 +126,7 @@ include_recipe 'infra-server::fix_permissions'
   postgresql
   oc_bifrost
   oc_id
-  elasticsearch
+  opensearch
   bookshelf
   opscode-erchef
   nginx
