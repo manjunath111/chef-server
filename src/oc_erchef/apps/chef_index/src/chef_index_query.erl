@@ -76,6 +76,19 @@ index_type("environment") ->
 index_type(DataBag) ->
     {'data_bag', list_to_binary(DataBag)}.
 
+% Lincoln Baker
+% http_uri:decode became deprecated, however there didn't appear to be a
+% direct drop-in replacement for how we were using it.  This is the
+% replacement.
+% uri_string:dissect_query/1 returns key-value pairs, and the value will
+% often or always be true based on my testing.
+unencode(X) ->
+    KVs = uri_string:dissect_query(X),
+    % We probably want this transformation:
+    % {"key", "value"} -> "key=value"
+    % {"key", true   } -> "key"
+    lists:flatten([case V of true -> K; _ -> [K, "=", V] end || {K, V} <- KVs]).
+
 check_query(RawQuery) ->
     case RawQuery of
         undefined ->
@@ -86,7 +99,7 @@ check_query(RawQuery) ->
             %% thou shalt not query with the empty string
             throw({bad_query, ""});
         Query ->
-            transform_query(http_uri:decode(Query))
+            transform_query(unencode(Query))
     end.
 
 transform_query(RawQuery) when is_list(RawQuery) ->
@@ -106,7 +119,7 @@ decode({nonneg_int, Key}, Val, Default) ->
                 {Default, default};
             Value ->
                 try
-                    {list_to_integer(http_uri:decode(Value)), Value}
+                    {list_to_integer(unencode(Value)), Value}
                 catch
                     error:badarg ->
                         throw({bad_param, {Key, Value}})
