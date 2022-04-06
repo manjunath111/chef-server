@@ -91,6 +91,9 @@ fallbacks:
     - name: gen_server2
       license_id: MIT
       license_content: https://github.com/hyperthunk/gen_server2/blob/master/rebar.config
+    - name: goldrush
+      license_id: ISC
+      license_content: https://github.com/DeadZen/goldrush/blob/master/LICENSE
     - name: mixer
       license_id: Apache-2.0
       license_content: https://github.com/inaka/mixer/blob/master/LICENSE
