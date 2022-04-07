@@ -46,7 +46,7 @@
 % {<<"fs">>,{pkg,<<"fs">>,<<"6.1.1">>},1},
  {<<"fs">>,
   {git,"https://github.com/synrc/fs",
-       {tag,"6.1.1"}},
+       {ref,"936ba9dcf88186250ecc5995e25154bde44252a1"}},
   1},
 % {<<"goldrush">>,{pkg,<<"goldrush">>,<<"0.1.9">>},1},
  {<<"goldrush">>,
